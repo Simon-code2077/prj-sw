@@ -36,7 +36,10 @@ typedef struct {
 #define TOP_MAGIC 'q'
 
 /* ioctls and their arguments */
-#define TOP_WRITE_BACKGROUND _IOW(TOP_MAGIC, 1, top_arg_t)
-#define TOP_READ_BACKGROUND  _IOR(TOP_MAGIC, 2, top_arg_t)
+#define TOP_WRITE_IMG_SIZE      _IOW(TOP_MAGIC, 1, top_arg_t)
+#define TOP_WRITE_WEIGHT_DATA   _IOW(TOP_MAGIC, 2, top_arg_t)
+#define TOP_WRITE_INPUT_DATA    _IOW(TOP_MAGIC, 3, top_arg_t)
+#define TOP_READ_OUTPUT_DATA    _IOR(TOP_MAGIC, 4, top_arg_t)
+#define TOP_READ_DONE           _IOR(TOP_MAGIC, 5, top_arg_t)
 
 #endif
