@@ -40,11 +40,11 @@
 #define DRIVER_NAME "top"
 
 /* Device registers */
-#define IMG_SIZE	(x) (x)
-#define WEIGHT_DATA	(x) ((x)+1)
-#define INPUT_DATA	(x) ((x)+2)
-#define DONE		(x) ((x)+3)
-#define OUTPUT_DATA	(x) ((x)+4)
+#define IMG_SIZE(x) 	(x)
+#define WEIGHT_DATA(x) 	((x)+1)
+#define INPUT_DATA(x) 	((x)+2)
+#define DONE(x) 		((x)+3)
+#define OUTPUT_DATA(x) 	((x)+4)
 
 /*
  * Information about our device
