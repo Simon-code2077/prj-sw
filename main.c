@@ -120,12 +120,12 @@
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
-         if (output_data[i] != input_data[i] + weight_data[i]) {
+         if (output_data[i] != input_data[i] * weight_data[i]) {
              fprintf(stderr, "Error: output_data[%d] = %d (expected %d)\n",
                      i, output_data[i], input_data[i] + weight_data[i]);
          }
      }
-     // for simplification, we assume output_data = input_data + weight_data
+     // for simplification, we assume output_data = input_data * weight_data
      printf("Top Userspace program terminating\n");
      return 0;
  }
