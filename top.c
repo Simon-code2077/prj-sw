@@ -66,7 +66,7 @@ struct top_dev {
 static void write_img_size(top_img_size_t *img_size)
 {
 	iowrite8(img_size->img_size, IMG_SIZE(dev.virtbase) );
-	dev.img_size = *background;
+	dev.img_size = *img_size;
 }
 static void write_weight_data(top_weight_data_t *weight_data)
 {
