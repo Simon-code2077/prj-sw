@@ -122,7 +122,8 @@
  
      // Wait for done signal
      printf("Waiting for done signal...\n");
-     while (read_done() == 0) {
+     while (read_done() % 10 == 0) {
+         printf("  done = %d\n", read_done());
          usleep(100000); // Sleep for 100ms
      }
      printf("Done signal received!\n");
