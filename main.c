@@ -119,7 +119,8 @@
          printf("  weight_data[%d] = %d\n", i, weight_data[i]);
          write_weight_data(weight_data[i]);
      }
- 
+     write_input_data(0);
+     write_weight_data(0);
      // Wait for done signal
      printf("Waiting for done signal...\n");
      while (read_done() % 10 == 0) {
