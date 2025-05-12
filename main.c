@@ -125,6 +125,8 @@
      printf("Waiting for done signal...\n");
      while (read_done() % 10 == 0) {
          printf("  done = %d\n", read_done());
+         write_input_data(0);
+         write_weight_data(0);
          usleep(100000); // Sleep for 100ms
      }
      printf("Done signal received!\n");
