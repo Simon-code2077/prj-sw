@@ -69,11 +69,13 @@
  
  int main() {
      static const char filename[] = "/dev/top";
-     unsigned char img_size = 4; // Example img_size
-     unsigned char input_data[16];
-     unsigned char weight_data[16];
-     unsigned char output_data[16];
+     unsigned char img_size = 16; // Example img_size
+     unsigned char input_data[16*16];
+     unsigned char weight_data[3*3];
+     unsigned char output_data[14*14];
+     unsigned char golden_data[14*14];
      int i;
+     int j;
  
      printf("Top Userspace program started\n");
  
@@ -83,25 +85,37 @@
      }
  
      // Initialize input_data and weight_data
-     for (i = 0; i < 16; i++) {
+     for (i = 0; i < 16*16; i++) {
          input_data[i] = i;       // Example input data: 0, 1, 2, ...
-         weight_data[i] = i + 1;  // Example weight data: 1, 2, 3, ...
      }
- 
+    for (i = 0; i < 3*3; i++) {
+        weight_data[i] = 32;     // Example weight data: 0, 1, 2, ...
+    }
      // Write img_size
      printf("Writing img_size: %d\n", img_size);
      write_img_size(img_size);
  
      // Write input_data
      printf("Writing input_data:\n");
-     for (i = 0; i < 16; i++) {
+     for (i = 0; i < 16*16; i++) {
          printf("  input_data[%d] = %d\n", i, input_data[i]);
          write_input_data(input_data[i]);
      }
- 
+    for (i = 0; i < 14; i++) 
+        for (j = 0; j < 14; j++) {
+            golden_data[i*14+j] =   input_data[i*16+j]          * weight_data[0]+
+                                    input_data[i*16+j+1]        * weight_data[1]+
+                                    input_data[i*16+j+2]        * weight_data[2]+
+                                    input_data[(i+1)*16+j]      * weight_data[3]+
+                                    input_data[(i+1)*16+j+1]    * weight_data[4]+
+                                    input_data[(i+1)*16+j+2]    * weight_data[5]+
+                                    input_data[(i+2)*16+j]      * weight_data[6]+
+                                    input_data[(i+2)*16+j+1]    * weight_data[7]+
+                                    input_data[(i+2)*16+j+2]    * weight_data[8];
+        }
      // Write weight_data
      printf("Writing weight_data:\n");
-     for (i = 0; i < 16; i++) {
+     for (i = 0; i < 9; i++) {
          printf("  weight_data[%d] = %d\n", i, weight_data[i]);
          write_weight_data(weight_data[i]);
      }
@@ -115,17 +129,17 @@
  
      // Read output_data
      printf("Reading output_data:\n");
-     for (i = 0; i < 16; i++) {
+     for (i = 0; i < 14*14; i++) {
          output_data[i] = read_output_data();
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
-         if (output_data[i] != input_data[i] * weight_data[i]) {
+         if (output_data[i] != golden_data[i]) {
              fprintf(stderr, "Error: output_data[%d] = %d (expected %d)\n",
-                     i, output_data[i], input_data[i] + weight_data[i]);
+                     i, output_data[i], golden_data[i]);
          }
      }
-     // for simplification, we assume output_data = input_data * weight_data
+     // for simplification, we assume output_data = input_data + weight_data
      printf("Top Userspace program terminating\n");
      return 0;
  }

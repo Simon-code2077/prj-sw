@@ -40,11 +40,11 @@
 #define DRIVER_NAME "top"
 
 /* Device registers */
-#define IMG_SIZE(x) 	(x)
-#define WEIGHT_DATA(x) 	((x)+1)
-#define INPUT_DATA(x) 	((x)+2)
-#define DONE(x) 		((x)+3)
-#define OUTPUT_DATA(x) 	((x)+4)
+#define IMG_SIZE	(x) (x)
+#define WEIGHT_DATA	(x) ((x)+1)
+#define INPUT_DATA	(x) ((x)+2)
+#define DONE		(x) ((x)+3)
+#define OUTPUT_DATA	(x) ((x)+4)
 
 /*
  * Information about our device
@@ -66,7 +66,7 @@ struct top_dev {
 static void write_img_size(top_img_size_t *img_size)
 {
 	iowrite8(img_size->img_size, IMG_SIZE(dev.virtbase) );
-	dev.img_size = *img_size;
+	dev.img_size = *background;
 }
 static void write_weight_data(top_weight_data_t *weight_data)
 {
