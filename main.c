@@ -88,7 +88,7 @@
      // Initialize input_data and weight_data
      for (i = 0; i < 16 ; i++) {
         for (j = 0; j < 16; j++) {
-            if (i == 4 || i ==5 || i == 6 || i == 10 || i == 11 || i == 12 || i == 15){
+            if (j == 4 || j ==5 || j == 6 || j == 10 || j == 11 || j == 12 || j == 15){
                 input_data[i*16+j] = 127;
             }
             else {
