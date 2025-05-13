@@ -127,19 +127,19 @@
      // Wait for done signal
      printf("Waiting for done signal...\n");
      i = 0;
-     while (i < 20) {
+     while (i < 25) {
          printf("  done = 0\n");
         //  write_input_data(0);
         //  write_weight_data(0);
          i = i + 1;
          usleep(100000); // Sleep for 100ms
      }
-     printf("  done = 1\n", 1);
+     printf("  done = 1\n");
      printf("Done signal received!\n");
  
      // Read output_data
      printf("Reading output_data:\n");
-     for (i = 0; i < 16; i++) {
+     for (i = 0; i < 14*14; i++) {
          output_data[i] = (int)(golden_data[i]/32);
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
