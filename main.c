@@ -105,7 +105,7 @@
      printf("Writing input_data:\n");
      for (i = 0; i < 16*16; i++) {
          printf("  input_data[%d] = %d\n", i, input_data[i]);
-        //  write_input_data(input_data[i]);
+         write_input_data(input_data[i]);
      }
     for (i = 0; i < 14; i++) 
         for (j = 0; j < 14; j++) {
@@ -125,12 +125,12 @@
      printf("Writing weight_data:\n");
      for (i = 0; i < 9; i++) {
          printf("  weight_data[%d] = %d\n", i, weight_data[i]);
-        //  write_weight_data(weight_data[i]);
+         write_weight_data(weight_data[i]);
      }
      // Wait for done signal
      printf("Waiting for done signal...\n");
      i = 0;
-     while (i<25){
+     while (read_done() == 0){
          printf("  done = 0\n");
         //  write_input_data(0);
         //  write_weight_data(0);
@@ -143,7 +143,8 @@
      // Read output_data
      printf("Reading output_data:\n");
      for (i = 0; i < 14*14; i++) {
-         output_data[i] = (int)(golden_data[i]/4);
+        output_data[i] = read_output_data();
+        //  output_data[i] = (int)(golden_data[i]/4);
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
