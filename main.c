@@ -123,7 +123,7 @@
     //     golden_data[i] = input_data[i]+weight_data[i];
 
      printf("Writing weight_data:\n");
-     for (i = 0; i < 16*16; i++) {
+     for (i = 0; i < 9; i++) {
          printf("  weight_data[%d] = %d\n", i, weight_data[i]);
         //  write_weight_data(weight_data[i]);
      }
@@ -148,7 +148,7 @@
  
          // Verify output_data
          if (golden_data[i] !=0){
-         if ((abs(output_data[i] * 512 - golden_data[i]) / golden_data[i]) > 0.5) {
+         if ((abs(output_data[i] * 4 - golden_data[i]) / golden_data[i]) > 0.5) {
              fprintf(stderr, "Error: output_data[%d] = %d (expected %d)\n",
                      i, output_data[i], golden_data[i]);
          }}
