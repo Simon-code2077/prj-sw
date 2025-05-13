@@ -140,7 +140,7 @@
      // Read output_data
      printf("Reading output_data:\n");
      for (i = 0; i < 16; i++) {
-         output_data[i] = int(golden_data[i]/32) * 32;
+         output_data[i] = (int)(golden_data[i]/32) * 32;
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
