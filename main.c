@@ -154,7 +154,7 @@
      }
      for (i = 0; i < 14; i++) {
          for (j = 0; j < 14; j++) {
-             fprintf("  %d, ", i*14+j, output_data[i*14+j]);
+             fprintf("  %d, ", output_data[i*14+j]);
              }
             printf("\n");
             }
