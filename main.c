@@ -287,7 +287,7 @@
 //          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
 //          // Verify output_data
-//          if ((abs(output_data[i] * 256 - golden_data[i]) / golden_data[i]) > 0.5) {
+//          if ((abs(output_data[i] * 2^44 - golden_data[i]) / golden_data[i]) > 0.5) {
 //              fprintf(stderr, "Error: output_data[%d] = %d (expected %d)\n",
 //                      i, output_data[i], golden_data[i]);
 //          }
