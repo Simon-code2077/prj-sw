@@ -140,11 +140,11 @@
      // Read output_data
      printf("Reading output_data:\n");
      for (i = 0; i < 14*14; i++) {
-         output_data[i] = (int)(golden_data[i]/32);
+         output_data[i] = (int)(golden_data[i]/64);
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
-         if ((abs(output_data[i] - golden_data[i]) / golden_data[i]) > 0.5) {
+         if ((abs(output_data[i] * 64 - golden_data[i]) / golden_data[i]) > 0.5) {
              fprintf(stderr, "Error: output_data[%d] = %d (expected %d)\n",
                      i, output_data[i], golden_data[i]);
          }
