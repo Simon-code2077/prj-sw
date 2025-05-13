@@ -154,12 +154,12 @@
                      i, output_data[i], golden_data[i]);
          }
      }
-     for (i = 0; i < 14; i++) 
+     for (i = 0; i < 14; i++) {
          for (j = 0; j < 14; j++) {
              fprintf("  %d, ", i*14+j, output_data[i*14+j]);
              }
             printf("\n");
-         }
+            }
      // for simplification, we assume output_data = input_data + weight_data
      printf("Top Userspace program terminating\n");
      return 0;
