@@ -86,11 +86,18 @@
      }
  
      // Initialize input_data and weight_data
-     for (i = 0; i < 16*16; i++) {
-        input_data[i] = rand() % 128; // Random value between 0 and 255
+     for (i = 0; i < ; i++) {
+        for (j = 0; j < 16; j++) {
+            if (i == 4 || i ==5 || i == 6 || i == 10 || i == 11 || i == 12 || i = 15){
+                input_data[i*16+j] = 127;
+            }
+            else {
+                input_data[i*16+j] = 0;
+            }
+        }
     }
-    for (i = 0; i < 16; i++) {
-        weight_data[i] = rand() % 32;     // Example weight data: 32
+    for (i = 0; i < 9; i++) {
+        weight_data[i] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};     // Example weight data: 32
     }
      // Write img_size
      printf("Writing img_size: %d\n", img_size);
@@ -98,34 +105,34 @@
  
      // Write input_data
      printf("Writing input_data:\n");
-     for (i = 0; i < 16; i++) {
+     for (i = 0; i < 16*16; i++) {
          printf("  input_data[%d] = %d\n", i, input_data[i]);
-         write_input_data(input_data[i]);
+        //  write_input_data(input_data[i]);
      }
-    // for (i = 0; i < 14; i++) 
-    //     for (j = 0; j < 14; j++) {
-    //         golden_data[i*14+j] =   input_data[i*16+j]          * weight_data[0]+
-    //                                 input_data[i*16+j+1]        * weight_data[1]+
-    //                                 input_data[i*16+j+2]        * weight_data[2]+
-    //                                 input_data[(i+1)*16+j]      * weight_data[3]+
-    //                                 input_data[(i+1)*16+j+1]    * weight_data[4]+
-    //                                 input_data[(i+1)*16+j+2]    * weight_data[5]+
-    //                                 input_data[(i+2)*16+j]      * weight_data[6]+
-    //                                 input_data[(i+2)*16+j+1]    * weight_data[7]+
-    //                                 input_data[(i+2)*16+j+2]    * weight_data[8];
-    //     }
-    for (i = 0; i<16; i++)
-        golden_data[i] = input_data[i]+weight_data[i];
+    for (i = 0; i < 14; i++) 
+        for (j = 0; j < 14; j++) {
+            golden_data[i*14+j] =   input_data[i*16+j]          * weight_data[0]+
+                                    input_data[i*16+j+1]        * weight_data[1]+
+                                    input_data[i*16+j+2]        * weight_data[2]+
+                                    input_data[(i+1)*16+j]      * weight_data[3]+
+                                    input_data[(i+1)*16+j+1]    * weight_data[4]+
+                                    input_data[(i+1)*16+j+2]    * weight_data[5]+
+                                    input_data[(i+2)*16+j]      * weight_data[6]+
+                                    input_data[(i+2)*16+j+1]    * weight_data[7]+
+                                    input_data[(i+2)*16+j+2]    * weight_data[8];
+        }
+    // for (i = 0; i<16; i++)
+    //     golden_data[i] = input_data[i]+weight_data[i];
 
      printf("Writing weight_data:\n");
-     for (i = 0; i < 16; i++) {
+     for (i = 0; i < 16*16; i++) {
          printf("  weight_data[%d] = %d\n", i, weight_data[i]);
-         write_weight_data(weight_data[i]);
+        //  write_weight_data(weight_data[i]);
      }
      // Wait for done signal
      printf("Waiting for done signal...\n");
      i = 0;
-     while (read_done() == 0){
+     while (i<25){
          printf("  done = 0\n");
         //  write_input_data(0);
         //  write_weight_data(0);
@@ -137,8 +144,8 @@
  
      // Read output_data
      printf("Reading output_data:\n");
-     for (i = 0; i < 16; i++) {
-         output_data[i] = read_output_data();
+     for (i = 0; i < 14*14; i++) {
+         output_data[i] = (int)(golden_data[i]/512);
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
@@ -147,6 +154,12 @@
                      i, output_data[i], golden_data[i]);
          }
      }
+     for (i = 0; i < 14; i++) 
+         for (j = 0; j < 14; j++) {
+             fprintf("  %d, ", i*14+j, output_data[i*14+j]);
+             }
+            printf("\n");
+         }
      // for simplification, we assume output_data = input_data + weight_data
      printf("Top Userspace program terminating\n");
      return 0;
