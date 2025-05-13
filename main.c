@@ -72,7 +72,7 @@
      static const char filename[] = "/dev/top";
      unsigned char img_size = 16; // Example img_size
      unsigned char input_data[16*16];
-     unsigned char weight_data[3*3];
+     unsigned char weight_data[3*3] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
      unsigned char output_data[14*14];
      int golden_data[14*14];
      int i;
@@ -96,9 +96,7 @@
             }
         }
     }
-    for (i = 0; i < 9; i++) {
-        weight_data[i] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};     // Example weight data: 32
-    }
+    
      // Write img_size
      printf("Writing img_size: %d\n", img_size);
     //  write_img_size(img_size);
