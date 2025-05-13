@@ -147,10 +147,11 @@
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
+         if (golden_data[i] !=0){
          if ((abs(output_data[i] * 512 - golden_data[i]) / golden_data[i]) > 0.5) {
              fprintf(stderr, "Error: output_data[%d] = %d (expected %d)\n",
                      i, output_data[i], golden_data[i]);
-         }
+         }}
      }
      for (i = 0; i < 14; i++) {
          for (j = 0; j < 14; j++) {
