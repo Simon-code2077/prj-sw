@@ -74,7 +74,7 @@
      unsigned char input_data[16*16];
      unsigned char weight_data[3*3];
      unsigned char output_data[14*14];
-     unsigned char golden_data[14*14];
+     int golden_data[14*14];
      int i;
      int j;
  
@@ -140,11 +140,11 @@
      // Read output_data
      printf("Reading output_data:\n");
      for (i = 0; i < 16; i++) {
-         output_data[i] = (int)(golden_data[i]/32) * 32;
+         output_data[i] = (int)(golden_data[i]/32);
          printf("  output_data[%d] = %d\n", i, output_data[i]);
  
          // Verify output_data
-         if ((abs(output_data[i] * 32 - golden_data[i]) / golden_data[i]) > 0.5) {
+         if ((abs(output_data[i] - golden_data[i]) / golden_data[i]) > 0.5) {
              fprintf(stderr, "Error: output_data[%d] = %d (expected %d)\n",
                      i, output_data[i], golden_data[i]);
          }
